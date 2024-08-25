@@ -120,8 +120,8 @@ fitSpaNorm <- function(Y, coords, sample.p, gene.model, df.tps = 6, lambda.a = 0
 
   # calculate effective library size if not precomputed
   if (is.null(LS)) {
-    cl = scran::quickCluster(Y)
-    logLS = log(pmax(1e-08, scran::calculateSumFactors(Y, clusters = cl)))
+    cl = scran::quickCluster(Y, BPPARAM = bpparam())
+    logLS = log(pmax(1e-08, scran::calculateSumFactors(Y, clusters = cl, BPPARAM = bpparam())))
   } else {
     logLS = log(pmax(1e-08, LS))
   }
